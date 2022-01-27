@@ -9,11 +9,11 @@ import com.example.loginapplication.model.db.dto.UserDto
 interface UserDao {
 
     @Query("SELECT * FROM UserDto WHERE email=:email  ")
-    fun findByEmail(email: String): UserDto
+    suspend fun findByEmail(email: String): UserDto
 
     @Query("SELECT EXISTS(SELECT * FROM UserDto WHERE email =:email)")
-    fun isRowExists(email: String): Boolean
+    suspend fun isRowExists(email: String): Boolean
 
     @Insert
-    fun insert(user: UserDto)
+    suspend fun insert(user: UserDto)
 }

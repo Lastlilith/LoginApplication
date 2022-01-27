@@ -8,7 +8,7 @@ class CheckIfUserExistsUseCase @Inject constructor(
     private val userDao: UserDao
 ) {
 
-    operator fun invoke(email: String): Boolean {
+    suspend operator fun invoke(email: String): Boolean {
         Timber.d("invoke $email")
        return userDao.isRowExists(email)
     }
