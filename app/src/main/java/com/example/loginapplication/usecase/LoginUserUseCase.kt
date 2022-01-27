@@ -1,33 +1,23 @@
 package com.example.loginapplication.usecase
 
-import com.example.loginapplication.model.db.dao.UserDao
-import com.example.loginapplication.model.domain.User
+import timber.log.Timber
 import javax.inject.Inject
 
 class LoginUserUseCase @Inject constructor(
-    private val userDao: UserDao
+    private val getUserByEmailUseCase: GetUserByEmailUseCase,
+    private val addLoggedInEmailToDatastoreUseCase: AddLoggedInEmailToDatastoreUseCase
 ) {
 
-    suspend operator fun invoke(email: String, password: String): Result {
-        return try {
-            val userDto = userDao.findByEmail(email)
+    suspend operator fun invoke(email: String, password: String) {
+        Timber.d("invoke: $email")
+        try {
+            val userDto = getUserByEmailUseCase(email)
             if (userDto.password != password) {
-                throw IllegalArgumentException("Passwords do not match")
+                Timber.e("LoginUserUseCase: failed, passwords do not match")
             }
-            Result.Success(User(userDto.email))
-        } catch (e: IllegalArgumentException) {
-            Result.Failure(FailureReason.INVALID_PASSWORD)
+            addLoggedInEmailToDatastoreUseCase(email)
         } catch (e: Exception) {
-            Result.Failure(FailureReason.USER_NOT_FOUND)
+            Timber.e("LoginUserUseCase: failed, exception: ${e.message}")
         }
-    }
-
-    sealed class Result {
-        data class Success(val user: User) : Result()
-        data class Failure(val failureReason: FailureReason) : Result()
-    }
-
-    enum class FailureReason {
-        INVALID_PASSWORD, USER_NOT_FOUND
     }
 }
