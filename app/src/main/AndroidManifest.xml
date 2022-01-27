@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginApplication">
 
-        <activity android:name=".Activity" />
+        <activity android:name=".Activity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
 
         <activity-alias
             android:name="Launcher"

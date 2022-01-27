@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Login Application</string>
+    <string name="login_powered_by_lastlilith">Powered by Lastlilith</string>
 </resources>
