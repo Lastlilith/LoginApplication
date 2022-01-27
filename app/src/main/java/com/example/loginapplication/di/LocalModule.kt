@@ -2,7 +2,8 @@ package com.example.loginapplication.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.loginapplication.db.ApplicationDatabase
+import com.example.loginapplication.model.db.ApplicationDatabase
+import com.example.loginapplication.model.db.dao.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,5 +21,11 @@ class LocalModule {
         return Room
             .databaseBuilder(context, ApplicationDatabase::class.java, "database")
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun userDao(applicationDatabase: ApplicationDatabase): UserDao {
+        return applicationDatabase.userDao()
     }
 }
