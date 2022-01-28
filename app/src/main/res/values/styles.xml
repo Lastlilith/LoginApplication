@@ -6,4 +6,16 @@
         <item name="cornerSizeBottomLeft">@dimen/dp_48</item>
         <item name="cornerSizeBottomRight">@dimen/dp_48</item>
     </style>
+
+    <style name="Style.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
+        <item name="boxBackgroundColor">@null</item>
+        <item name="startIconTint">@color/text_input_icon_color_list</item>
+        <item name="android:textColorHint">?attr/colorSecondary</item>
+        <item name="hintTextColor">?attr/colorSecondary</item>
+    </style>
+
+    <style name="ThemeOverlay.App.TextInputLayout" parent="">
+        <item name="colorAccent">@color/teal_blue</item>
+    </style>
 </resources>

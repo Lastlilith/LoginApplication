@@ -14,5 +14,11 @@
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <item name="textInputStyle">@style/Style.App.TextInputLayout</item>
+    </style>
+
+    <style name="Theme.LoginApplication.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/pink</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/pink</item>
     </style>
 </resources>

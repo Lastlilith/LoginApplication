@@ -11,13 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LoginApplication">
 
-        <activity android:name=".Activity"
-            android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
+            android:name=".Activity"
+            android:windowSoftInputMode="stateVisible|adjustResize" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.LoginApplication.Splash" />
 
         <activity-alias
             android:name="Launcher"
             android:exported="true"
-            android:targetActivity=".Activity">
+            android:targetActivity=".SplashActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
