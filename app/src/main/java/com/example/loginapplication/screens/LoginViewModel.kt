@@ -9,6 +9,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -25,7 +26,12 @@ class LoginViewModel @Inject constructor(
     private val _state = MutableStateFlow(LoginState())
     val state : Flow<LoginState> = _state
 
+    init {
+        Timber.d("init")
+    }
+
     fun loginClicked(email: String, password: String) {
+        Timber.d("loginClicked: $email, $password")
         if(validateInput(email, password)) {
             viewModelScope.launch {
                val result = loginUserUseCase(email, password)
