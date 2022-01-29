@@ -7,6 +7,12 @@
         <item name="cornerSizeBottomRight">@dimen/dp_48</item>
     </style>
 
+    <style name="ShapeAppearance.App.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">@dimen/dp_48</item>
+        <item name="cornerSizeTopLeft">@dimen/dp_48</item>
+    </style>
+
     <style name="Style.App.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.TextInputLayout</item>
         <item name="boxBackgroundColor">@null</item>

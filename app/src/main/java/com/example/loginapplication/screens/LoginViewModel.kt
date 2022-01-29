@@ -2,6 +2,7 @@ package com.example.loginapplication.screens
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.loginapplication.usecase.GetUserByEmailUseCase
 import com.example.loginapplication.usecase.LoginUserUseCase
 import com.example.loginapplication.usecase.RegisterUserUseCase
 import com.example.loginapplication.utils.isValidEmail
@@ -17,8 +18,15 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     private val loginUserUseCase: LoginUserUseCase,
-    private val registerUserUseCase: RegisterUserUseCase
+    private val registerUserUseCase: RegisterUserUseCase,
+    private val getUserByEmailUseCase: GetUserByEmailUseCase
 ) : ViewModel() {
+
+    private val _forgotPasswordGetSuccess = MutableSharedFlow<String>()
+    val forgotPasswordGetSuccess : Flow<String> = _forgotPasswordGetSuccess
+
+    private val _bottomSheetShow = MutableSharedFlow<Unit>()
+    val bottomSheetShow: Flow<Unit> = _bottomSheetShow
 
     private val _registerSuccess = MutableSharedFlow<Unit>()
     val registerSuccess : Flow<Unit> = _registerSuccess
@@ -64,7 +72,10 @@ class LoginViewModel @Inject constructor(
     }
 
     fun forgotPasswordClicked() {
-
+        Timber.d("showing")
+        viewModelScope.launch {
+            _bottomSheetShow.emit(Unit)
+        }
     }
 
     private fun validateInput(email: String, password: String): Boolean {
@@ -77,5 +88,16 @@ class LoginViewModel @Inject constructor(
         )
 
         return isEmailValid && isPasswordValid
+    }
+
+    fun forgotPasswordSubmitClicked(email: String) {
+        viewModelScope.launch {
+            try {
+                val userDto = getUserByEmailUseCase(email)
+                _forgotPasswordGetSuccess.emit(userDto.password)
+            } catch (e: Exception) {
+                _error.emit(Unit)
+            }
+        }
     }
 }
