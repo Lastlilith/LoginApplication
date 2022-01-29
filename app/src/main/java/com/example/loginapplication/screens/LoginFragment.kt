@@ -9,6 +9,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.loginapplication.R
 import com.example.loginapplication.databinding.FragmentLoginBinding
+import com.example.loginapplication.utils.getColorByAttribute
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -42,6 +44,13 @@ class LoginFragment : Fragment() {
             )
         }
 
+        binding.signUpButton.setOnClickListener {
+            viewModel.signUpClicked(
+                binding.usernameEditText.text.toString(),
+                binding.passwordEditText.text.toString()
+            )
+        }
+
         with(lifecycleScope) {
             viewModel.state.onEach { state ->
                 Timber.d(state.toString())
@@ -55,8 +64,37 @@ class LoginFragment : Fragment() {
                 } else {
                     resources.getString(R.string.login_invalid_password)
                 }
+
+            }.launchIn(this)
+
+            viewModel.error.onEach {
+                Timber.d("Error!")
+                showSnackBar(
+                    resources.getString(R.string.login_failed),
+                    requireContext().getColorByAttribute(androidx.appcompat.R.attr.colorError)
+                )
+            }.launchIn(this)
+
+            viewModel.registerSuccess.onEach {
+                Timber.d("Register success!")
+                showSnackBar(
+                    resources.getString(R.string.login_register_success),
+                    requireContext().getColorByAttribute(androidx.appcompat.R.attr.colorPrimary)
+                )
             }.launchIn(this)
         }
+    }
+
+    private fun showSnackBar(message: String, backgroundTint: Int) {
+        Snackbar
+            .make(
+                requireContext(),
+                binding.root,
+                message,
+                Snackbar.LENGTH_LONG
+            )
+            .setBackgroundTint(backgroundTint)
+            .show()
     }
 
     override fun onDestroy() {

@@ -10,5 +10,7 @@
     <string name="login_get_to_account">To get to your account!</string>
     <string name="login_invalid_email">Invalid Email!</string>
     <string name="login_invalid_password">Invalid Password!</string>
+    <string name="login_failed">Login failed!</string>
+    <string name="login_register_success">Registration success</string>
 
 </resources>
