@@ -24,4 +24,8 @@
     <style name="ThemeOverlay.App.TextInputLayout" parent="">
         <item name="colorAccent">@color/teal_blue</item>
     </style>
+
+    <style name="Widget.App.Appbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="android:background">@drawable/top_app_bar_gradient</item>
+    </style>
 </resources>

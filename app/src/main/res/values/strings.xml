@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Login Application</string>
-    <string name="login_powered_by_lastlilith">Powered by Lastlilith</string>
+    <string name="powered_by_lastlilith">Powered by Lastlilith</string>
     <string name="login_login">Login</string>
     <string name="login_mania">Mania</string>
     <string name="login_sign_up">Sign Up</string>
@@ -14,5 +14,9 @@
     <string name="login_register_success">Registration success</string>
     <string name="login_submit">Submit</string>
     <string name="login_your_password_is">Your password is: %1$s</string>
+
+    <string name="logged_in_title">Logged in</string>
+    <string name="logged_in_logout">Log out</string>
+    <string name="logged_in_logout_icon_description">Log out icon</string>
 
 </resources>

@@ -7,7 +7,16 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.loginapplication.screens.LoginFragment"
-        tools:layout="@layout/fragment_login"/>
+        android:name="com.example.loginapplication.screens.login.LoginFragment"
+        tools:layout="@layout/fragment_login">
+
+        <action
+            android:id="@+id/toLoggedIn"
+            app:destination="@id/loggedInFragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/loggedInFragment"
+        android:name="com.example.loginapplication.screens.loggedin.LoggedInFragment"/>
 
 </navigation>

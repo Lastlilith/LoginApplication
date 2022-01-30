@@ -1,4 +1,4 @@
-package com.example.loginapplication.screens
+package com.example.loginapplication.screens.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
