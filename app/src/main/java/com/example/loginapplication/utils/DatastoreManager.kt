@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class DatastoreManager @Inject constructor(
@@ -13,6 +15,12 @@ class DatastoreManager @Inject constructor(
    suspend fun addToDatastore(key: Preferences.Key<String>, value: String) {
         context.dataStore.edit { settings ->
             settings[key] = value
+        }
+    }
+
+    fun observeKeyValue(key: Preferences.Key<String>): Flow<String?> {
+        return context.dataStore.data.map {preferences ->
+            preferences[key]
         }
     }
 }

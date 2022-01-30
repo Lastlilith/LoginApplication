@@ -2,8 +2,14 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/loginFragment"
+    app:startDestination="@id/loggedInFragment"
     android:id="@+id/nav_graph">
+
+    <action
+        android:id="@+id/logOut"
+        app:destination="@+id/loginFragment"
+        app:popUpTo="@id/nav_graph"
+        app:popUpToInclusive="true"/>
 
     <fragment
         android:id="@+id/loginFragment"
