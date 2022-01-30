@@ -13,6 +13,7 @@ import com.example.loginapplication.databinding.ForgotPasswordDialogBinding
 import com.example.loginapplication.databinding.FragmentLoginBinding
 import com.example.loginapplication.utils.getColorByAttribute
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.launchIn
@@ -71,7 +72,6 @@ class LoginFragment : Fragment() {
                 } else {
                     resources.getString(R.string.login_invalid_password)
                 }
-
             }.launchIn(this)
 
             viewModel.error.onEach {
@@ -86,7 +86,13 @@ class LoginFragment : Fragment() {
                 Timber.d("Register success!")
                 showSnackBar(
                     resources.getString(R.string.login_register_success),
-                    requireContext().getColorByAttribute(androidx.appcompat.R.attr.colorPrimary)
+                    requireContext().getColorByAttribute(androidx.appcompat.R.attr.colorPrimary),
+                    object: BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                        override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                            super.onDismissed(transientBottomBar, event)
+                            viewModel.onRegistrationSnackBarDismissed()
+                        }
+                    }
                 )
             }.launchIn(this)
 
@@ -109,16 +115,24 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun showSnackBar(message: String, backgroundTint: Int) {
-        Snackbar
+    private fun showSnackBar(
+        message: String,
+        backgroundTint: Int,
+        callback: BaseTransientBottomBar.BaseCallback<Snackbar>? = null
+    ) {
+        val snackBar = Snackbar
             .make(
                 requireContext(),
                 binding.root,
                 message,
                 Snackbar.LENGTH_LONG
-            )
-            .setBackgroundTint(backgroundTint)
-            .show()
+            ).setBackgroundTint(backgroundTint)
+
+        if(callback!= null) {
+            snackBar.addCallback(callback)
+        }
+
+        snackBar.show()
     }
 
     private fun showForgotPasswordBottomSheetDialog() {

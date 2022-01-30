@@ -65,7 +65,10 @@ class LoginViewModel @Inject constructor(
                     RegisterUserUseCase.Result.Failure -> {
                         _error.emit(Unit)
                     }
-                    RegisterUserUseCase.Result.Success -> _registerSuccess.emit(Unit)
+                    RegisterUserUseCase.Result.Success -> {
+                        loginUserUseCase(email, password)
+                        _registerSuccess.emit(Unit)
+                    }
                 }
             }
         }
@@ -98,6 +101,12 @@ class LoginViewModel @Inject constructor(
             } catch (e: Exception) {
                 _error.emit(Unit)
             }
+        }
+    }
+
+    fun onRegistrationSnackBarDismissed() {
+        viewModelScope.launch {
+            _navigateToApp.emit(Unit)
         }
     }
 }
