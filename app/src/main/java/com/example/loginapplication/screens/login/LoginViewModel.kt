@@ -2,7 +2,7 @@ package com.example.loginapplication.screens.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.loginapplication.usecase.GetUserByEmailUseCase
+import com.example.loginapplication.usecase.GetForgottenPasswordUseCase
 import com.example.loginapplication.usecase.LoginUserUseCase
 import com.example.loginapplication.usecase.RegisterUserUseCase
 import com.example.loginapplication.utils.isValidEmail
@@ -19,7 +19,7 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUserUseCase: LoginUserUseCase,
     private val registerUserUseCase: RegisterUserUseCase,
-    private val getUserByEmailUseCase: GetUserByEmailUseCase
+    private val getForgottenPasswordUseCase: GetForgottenPasswordUseCase
 ) : ViewModel() {
 
     private val _forgotPasswordGetSuccess = MutableSharedFlow<String>()
@@ -31,8 +31,8 @@ class LoginViewModel @Inject constructor(
     private val _registerSuccess = MutableSharedFlow<Unit>()
     val registerSuccess : Flow<Unit> = _registerSuccess
 
-    private val _error = MutableSharedFlow<Unit>()
-    val error: Flow<Unit> = _error
+    private val _error = MutableSharedFlow<LoginErrorType>()
+    val error: Flow<LoginErrorType> = _error
 
     private val _navigateToApp = MutableSharedFlow<Unit>()
     val navigateToApp: Flow<Unit> = _navigateToApp
@@ -50,7 +50,7 @@ class LoginViewModel @Inject constructor(
             viewModelScope.launch {
                when(loginUserUseCase(email, password)) {
                     LoginUserUseCase.Result.Failure -> {
-                        _error.emit(Unit)
+                        _error.emit(LoginErrorType.LOGIN)
                     }
                     LoginUserUseCase.Result.Success -> _navigateToApp.emit(Unit)
                 }
@@ -63,7 +63,7 @@ class LoginViewModel @Inject constructor(
             viewModelScope.launch {
                 when(registerUserUseCase(email, password)) {
                     RegisterUserUseCase.Result.Failure -> {
-                        _error.emit(Unit)
+                        _error.emit(LoginErrorType.SIGNUP)
                     }
                     RegisterUserUseCase.Result.Success -> {
                         loginUserUseCase(email, password)
@@ -96,10 +96,10 @@ class LoginViewModel @Inject constructor(
     fun forgotPasswordSubmitClicked(email: String) {
         viewModelScope.launch {
             try {
-                val userDto = getUserByEmailUseCase(email)
-                _forgotPasswordGetSuccess.emit(userDto.password)
+                val password = getForgottenPasswordUseCase(email)
+                _forgotPasswordGetSuccess.emit(password)
             } catch (e: Exception) {
-                _error.emit(Unit)
+                _error.emit(LoginErrorType.FORGOT_PASSWORD)
             }
         }
     }
@@ -109,4 +109,8 @@ class LoginViewModel @Inject constructor(
             _navigateToApp.emit(Unit)
         }
     }
+}
+
+enum class LoginErrorType {
+    LOGIN, SIGNUP, FORGOT_PASSWORD
 }

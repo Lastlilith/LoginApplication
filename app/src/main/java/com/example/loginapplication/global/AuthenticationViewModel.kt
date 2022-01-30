@@ -2,7 +2,7 @@ package com.example.loginapplication.global
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.loginapplication.usecase.ObserveUserUseCase
+import com.example.loginapplication.usecase.ObserveLoggedInUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AuthenticationViewModel @Inject constructor(
-    private val observeUserUseCase: ObserveUserUseCase
+    private val observeLoggedInUserUseCase: ObserveLoggedInUserUseCase
 ): ViewModel() {
 
     private val _logOut = MutableSharedFlow<Unit>()
@@ -21,7 +21,7 @@ class AuthenticationViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            observeUserUseCase().onEach {user ->
+            observeLoggedInUserUseCase().onEach { user ->
                 if(user == null) {
                     _logOut.emit(Unit)
                 }

@@ -11,6 +11,7 @@
     <string name="login_invalid_email">Invalid Email!</string>
     <string name="login_invalid_password">Invalid Password!</string>
     <string name="login_failed">Login failed!</string>
+    <string name="login_error">Error</string>
     <string name="login_register_success">Registration success</string>
     <string name="login_submit">Submit</string>
     <string name="login_your_password_is">Your password is: %1$s</string>
@@ -18,5 +19,6 @@
     <string name="logged_in_title">Logged in</string>
     <string name="logged_in_logout">Log out</string>
     <string name="logged_in_logout_icon_description">Log out icon</string>
+    <string name="logged_in_welcome">Welcome %1$s!</string>
 
 </resources>

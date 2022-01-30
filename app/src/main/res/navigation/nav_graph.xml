@@ -8,6 +8,8 @@
     <action
         android:id="@+id/logOut"
         app:destination="@+id/loginFragment"
+        app:enterAnim="@anim/slide_in_top"
+        app:exitAnim="@anim/slide_out_top"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true"/>
 
@@ -18,7 +20,11 @@
 
         <action
             android:id="@+id/toLoggedIn"
-            app:destination="@id/loggedInFragment"/>
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loggedInFragment"
+            app:enterAnim="@anim/slide_in_top"
+            app:exitAnim="@anim/slide_out_top"/>
     </fragment>
 
     <fragment

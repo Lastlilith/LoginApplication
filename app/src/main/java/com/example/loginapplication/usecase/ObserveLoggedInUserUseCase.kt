@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class ObserveUserUseCase @Inject constructor(
+class ObserveLoggedInUserUseCase @Inject constructor(
     private val datastoreManager: DatastoreManager
 ){
 

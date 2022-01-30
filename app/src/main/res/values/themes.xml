@@ -9,6 +9,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <item name="colorAccent">@color/pink</item>
         <item name="colorOnSurface">@color/gray</item>
+        <item name="colorError">@color/bright_red</item>
 
         <item name="android:windowBackground">@color/pink</item>
         <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>

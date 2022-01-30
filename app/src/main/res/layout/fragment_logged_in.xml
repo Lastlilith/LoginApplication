@@ -27,16 +27,16 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginBottom="@dimen/dp_16">
+            android:layout_marginBottom="@dimen/dp_16"
+            android:layout_weight="1">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/welcomeTextView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:textAppearance="?attr/textAppearanceSubtitle1"
-                android:textColor="?attr/colorSecondary"/>
+                android:textColor="?attr/colorSecondary" />
 
         </com.google.android.material.card.MaterialCardView>
 
