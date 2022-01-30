@@ -18,6 +18,12 @@ class DatastoreManager @Inject constructor(
         }
     }
 
+    suspend fun removeFromDataStore(key: Preferences.Key<String>) {
+        context.dataStore.edit { settings ->
+            settings.remove(key)
+        }
+    }
+
     fun observeKeyValue(key: Preferences.Key<String>): Flow<String?> {
         return context.dataStore.data.map {preferences ->
             preferences[key]
