@@ -4,11 +4,11 @@ import com.example.loginapplication.model.db.dto.UserDto
 import timber.log.Timber
 import javax.inject.Inject
 
-class RegisterUserUseCase @Inject constructor(
+open class RegisterUserUseCase @Inject constructor(
     private val addUserToDatabaseUseCase: AddUserToDatabaseUseCase,
     private val checkIfUserExistsUseCase: CheckIfUserExistsUseCase
 ) {
-   suspend operator fun invoke(email: String, password: String): Result {
+   open suspend operator fun invoke(email: String, password: String): Result {
         Timber.d("invoke: $email")
         val userExists = checkIfUserExistsUseCase(email)
         return if (!userExists) {
