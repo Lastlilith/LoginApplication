@@ -8,7 +8,7 @@ import com.example.loginapplication.usecase.GetForgottenPasswordUseCase
 import com.example.loginapplication.usecase.LoginUserUseCase
 import com.example.loginapplication.usecase.RegisterUserUseCase
 import com.example.loginapplication.usecase.Result
-import junit.framework.Assert.assertEquals
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.resetMain
